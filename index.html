@@ -1,0 +1,114 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Student CRUD</title>
+  </head>
+  <body>
+   
+<div class="container mt-4" style="width: 40%;">
+  <h2 class="text-center" style="font-family: 'Courier New', Courier, monospace;">Login Here!</h2>
+    <!-- <form method="POST" action="studlogin.php"> -->
+        <div class="form-group">
+          <label for="exampleInputEmail1">Username</label>
+          <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <label for="exampleInputPassword1"></label>
+          <input type="password" class="form-control" name="password" autocomplete="on" placeholder="password">
+        </div>
+       <div class="text-center">
+            <button type="submit" class="btn btn-primary login" value="submit"  class="btn btn-primary">Login</button>
+            <!-- data-id="sachin" -->
+       </div>
+       <div class="container mt-3 text-center"  style="font-family: 'Courier New', Courier, monospace; color: red;">
+        <span id="errormsg"></span>
+       </div>
+      <!-- </form> -->
+
+</div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+
+    // $(document).ready(function(){
+    //     // $('#errormsg').hide();
+    // }); 
+
+      // Delete 
+      $('.login').click(function()
+      {
+              var el = this;
+              // Delete id
+            //   var username = $(this).data('id');
+             var uname= document.getElementById("exampleInputEmail1").value;
+         
+                // console.log(username)
+              // var confirmalert = confirm("Are you sure?");
+                
+              // if (confirmalert == true) 
+              // {
+                      // AJAX Request
+                      $.ajax({
+                        url: 'studlogin.php',
+                        type: 'POST',
+                        data: { usname:uname },
+                        success: function(response)
+                        {
+                            console.log(response)
+                            if(response==1)
+                            {
+                                sessionStorage.setItem("usname", "sachin");
+                              swal("Good job", "Login Successfully", "success").then((value) => {
+                                window.location="studentform.html";
+                                });
+                            }
+                            else if(response==0)
+                            {
+                                // window.location="index.html";
+                                document.getElementById("errormsg").innerText="Please provide correct password and username!!";
+
+                                //  $('#errormsg').show();
+
+
+                            }
+                    
+                        },
+                        error: function (error) {
+                            // $('#errormsg').show();
+
+                            window.location="index.html";
+                            document.getElementById("errormsg").innerText="Please provide correct password and username!!";
+
+
+                        
+                    }
+
+                    });
+              // }
+              
+      });
+
+
+
+
+</script> 
+
+</body>
+</html>
